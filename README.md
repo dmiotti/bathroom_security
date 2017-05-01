@@ -1,5 +1,15 @@
 # BathroomSecurity
 
+## Usage
+
+```
+iex -S mix
+
+Bathroom.resolve("ULL RRDDD LURDL UUUUD")
+```
+
+## Instructions
+
 Exercice from http://adventofcode.com/.
 
 --- Day 2: Bathroom Security ---
