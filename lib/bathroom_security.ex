@@ -1,3 +1,0 @@
-defmodule BathroomSecurity do
-  
-end

@@ -1,4 +1,4 @@
-defmodule BathroomSecurityTest do
+defmodule BathroomTest do
   use ExUnit.Case
   doctest BathroomSecurity
 

@@ -5,7 +5,7 @@
 ```
 iex -S mix
 
-Bathroom.resolve("ULL RRDDD LURDL UUUUD")
+Bathroom.resolve(["ULL", "RRDDD", "LURDL", "UUUUD"])
 ```
 
 ## Instructions
