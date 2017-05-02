@@ -2,6 +2,9 @@ defmodule Bathroom do
 
   @keypad { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} }
 
+  def load(moves, start_pos \\ {1, 1}) do
+  end
+
   def at(pos) do
     case pos do
       {x, _} when x < 0 or x > 2 -> :none
