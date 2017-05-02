@@ -2,7 +2,55 @@ defmodule Bathroom do
 
   @keypad { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} }
 
-  def load(moves, start_pos \\ {1, 1}) do
+  defmodule State do
+    defstruct pos: {1, 1}
+  end
+
+  def init(pos \\ {1, 1}), do: %State{pos: pos}
+
+  def make_move(:left, state) do
+    new_pos = {get_x(state.pos) - 1, get_y(state.pos)}
+    next = at(new_pos)
+    case next do
+      :none -> state
+      _ -> %{state | pos: next}
+    end
+  end
+
+  def move_matrix(move) do
+    case move do
+      :left   -> {-1,  0}
+      :right  -> { 1,  0}
+      :up     -> { 0, -1}
+      :down   -> { 0,  1}
+    end
+  end
+
+  def make_move(:right, state) do
+    state
+  end
+
+  def make_move(:up, state) do
+    state
+  end
+
+  def make_move(:down, state) do
+    state
+  end
+
+  def make_move(_, state), do: state
+
+  def get_x(pos), do: elem(pos, 0)
+  def get_y(pos), do: elem(pos, 1)
+
+  def convert_move(str) do
+    case str do
+      "L" -> :left
+      "R" -> :right
+      "U" -> :up
+      "D" -> :down
+      _   -> :none
+    end
   end
 
   def at(pos) do
