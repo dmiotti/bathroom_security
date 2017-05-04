@@ -14,6 +14,15 @@ defmodule BathroomTest do
     assert Bathroom.at({2, 2}) == 9
   end
 
+  test "load_moves" do
+    d1 = "LLLDDDUU"
+    d2 = "DDUUULLRR"
+    d3 = "LLDDURD"
+    state = Bathroom.init
+    found = Bathroom.load_patterns([d1, d2, d3], state)
+    assert found == "438"
+  end
+
   test ":none when out of bound" do
     assert Bathroom.at({-1, 0}) == :none
     assert Bathroom.at({5, 1}) == :none
@@ -47,21 +56,21 @@ defmodule BathroomTest do
   end
 
   test "make_move" do
-    state = Bathroom.init()
+    pos = Bathroom.init().pos
 
-    new_state = Bathroom.make_move(:left, state)
-    assert new_state.pos == {0, 1}
+    new_pos = Bathroom.make_move(:left, pos)
+    assert new_pos == {0, 1}
 
-    new_state = Bathroom.make_move(:right, state)
-    assert new_state.pos == {2, 1}
+    new_pos = Bathroom.make_move(:right, pos)
+    assert new_pos == {2, 1}
 
-    new_state = Bathroom.make_move(:up, state)
-    assert new_state.pos == {1, 0}
+    new_pos = Bathroom.make_move(:up, pos)
+    assert new_pos == {1, 0}
 
-    new_state = Bathroom.make_move(:down, state)
-    assert new_state.pos == {1, 2}
+    new_pos = Bathroom.make_move(:down, pos)
+    assert new_pos == {1, 2}
 
-    state = Bathroom.make_move(:down, Bathroom.init({2, 2}))
-    assert state.pos == {2, 2}
+    new_pos = Bathroom.make_move(:down, {2, 2})
+    assert new_pos == {2, 2}
   end
 end

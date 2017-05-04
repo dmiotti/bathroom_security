@@ -3,21 +3,40 @@ defmodule Bathroom do
   @keypad { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} }
 
   defmodule State do
-    defstruct pos: {1, 1}
+    defstruct pos: {1, 1}, digits: nil
   end
 
   def init(pos \\ {1, 1}), do: %State{pos: pos}
 
-  def make_move(move, state) do
+  def load_patterns(patterns, state) do
+    patterns |> Enum.reduce(state, fn (pattern, state) ->
+      new_pos = load_pattern(pattern, state.pos)
+      digit = case at(new_pos) do
+        :none -> nil
+        val -> val
+      end
+      %{state | pos: new_pos, digits: "#{state.digits}#{digit}"}
+    end)
+  end
+
+  def load_pattern(pattern, pos) do
+    pattern |> String.graphemes |> Enum.reduce(pos, fn (char, pos) ->
+      case convert_move(char) do
+        :none -> pos
+        move -> make_move(move, pos)
+      end
+    end)
+  end
+
+  def make_move(move, pos) do
     m = move_matrix(move)
     new_pos = {
-      get_x(state.pos) + get_x(m), 
-      get_y(state.pos) + get_y(m)
+      get_x(pos) + get_x(m),
+      get_y(pos) + get_y(m)
     }
-    next = at(new_pos)
-    case next do
-      :none -> state
-      _ -> %{state | pos: new_pos}
+    case at(new_pos) do
+      :none -> pos
+      _ -> new_pos
     end
   end
 
