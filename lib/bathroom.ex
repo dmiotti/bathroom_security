@@ -8,12 +8,16 @@ defmodule Bathroom do
 
   def init(pos \\ {1, 1}), do: %State{pos: pos}
 
-  def make_move(:left, state) do
-    new_pos = {get_x(state.pos) - 1, get_y(state.pos)}
+  def make_move(move, state) do
+    m = move_matrix(move)
+    new_pos = {
+      get_x(state.pos) + get_x(m), 
+      get_y(state.pos) + get_y(m)
+    }
     next = at(new_pos)
     case next do
       :none -> state
-      _ -> %{state | pos: next}
+      _ -> %{state | pos: new_pos}
     end
   end
 
@@ -25,20 +29,6 @@ defmodule Bathroom do
       :down   -> { 0,  1}
     end
   end
-
-  def make_move(:right, state) do
-    state
-  end
-
-  def make_move(:up, state) do
-    state
-  end
-
-  def make_move(:down, state) do
-    state
-  end
-
-  def make_move(_, state), do: state
 
   def get_x(pos), do: elem(pos, 0)
   def get_y(pos), do: elem(pos, 1)
