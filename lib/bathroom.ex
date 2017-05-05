@@ -15,6 +15,9 @@ defmodule Bathroom do
         :none -> nil
         val -> val
       end
+      # IO.puts pattern
+      # IO.inspect new_pos
+      # IO.inspect digit
       %{state | pos: new_pos, digits: "#{state.digits}#{digit}"}
     end)
   end
