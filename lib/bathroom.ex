@@ -1,6 +1,12 @@
 defmodule Bathroom do
 
-  @keypad { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} }
+  @keypad {
+    {:none, :none, "1", :none, :none},
+    {:none, "2", "3", "4", :none},
+    {"5", "6", "7", "8", "9"},
+    {:none, "A", "B", "C", :none},
+    {:none, :none, "D", :none, :none}
+  }
 
   defmodule State do
     defstruct pos: {1, 1}, digits: nil
@@ -64,8 +70,8 @@ defmodule Bathroom do
 
   def at(pos) do
     case pos do
-      {x, _} when x < 0 or x > 2 -> :none
-      {_, y} when y < 0 or y > 2 -> :none
+      {x, _} when x < 0 or x > 4 -> :none
+      {_, y} when y < 0 or y > 4 -> :none
       {x, y} -> elem(elem(@keypad, y), x)
     end
   end
