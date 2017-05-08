@@ -5,7 +5,8 @@
 ```
 iex -S mix
 
-Bathroom.resolve(["ULL", "RRDDD", "LURDL", "UUUUD"])
+state = Bathroom.init
+state = Bathroom.load_patterms(["LLUUDDRR", "LLUUDDRR", "LLUUDDRR"], state)
 ```
 
 ## Instructions
