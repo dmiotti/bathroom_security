@@ -4,23 +4,37 @@ defmodule BathroomTest do
 
   test "Bathroom.at" do
     assert Bathroom.at({0, 0}) == 1
-    assert Bathroom.at({0, 1}) == 2
-    assert Bathroom.at({0, 2}) == 3
-    assert Bathroom.at({1, 0}) == 4
+    assert Bathroom.at({1, 0}) == 2
+    assert Bathroom.at({2, 0}) == 3
+
+    assert Bathroom.at({0, 1}) == 4
     assert Bathroom.at({1, 1}) == 5
-    assert Bathroom.at({1, 2}) == 6
-    assert Bathroom.at({2, 0}) == 7
-    assert Bathroom.at({2, 1}) == 8
+    assert Bathroom.at({2, 1}) == 6
+
+    assert Bathroom.at({0, 2}) == 7
+    assert Bathroom.at({1, 2}) == 8
     assert Bathroom.at({2, 2}) == 9
   end
 
-  test "load_moves" do
+  test "load_patterns" do
     d1 = "LLLDDDUU"
     d2 = "DDUUULLRR"
     d3 = "LLDDURD"
     state = Bathroom.init
     found = Bathroom.load_patterns([d1, d2, d3], state)
-    assert found == "438"
+    assert found.digits == "138"
+  end
+
+  test "load_pattern" do
+    pattrn = "LLDDUU"
+    state = Bathroom.init
+    new_pos = Bathroom.load_pattern(pattrn, state.pos)
+    assert new_pos == {0, 0}
+
+    pattrn = "DDUUULLRR"
+    state = Bathroom.init({0, 0})
+    new_pos = Bathroom.load_pattern(pattrn, state.pos)
+    assert new_pos == {2, 0}
   end
 
   test ":none when out of bound" do

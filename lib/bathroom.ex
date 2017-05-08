@@ -66,7 +66,7 @@ defmodule Bathroom do
     case pos do
       {x, _} when x < 0 or x > 2 -> :none
       {_, y} when y < 0 or y > 2 -> :none
-      {x, y} -> elem(elem(@keypad, x), y)
+      {x, y} -> elem(elem(@keypad, y), x)
     end
   end
 end
