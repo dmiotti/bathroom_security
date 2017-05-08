@@ -72,19 +72,11 @@ defmodule BathroomTest do
   test "make_move" do
     pos = Bathroom.init().pos
 
-    new_pos = Bathroom.make_move(:left, pos)
-    assert new_pos == {0, 1}
-
-    new_pos = Bathroom.make_move(:right, pos)
-    assert new_pos == {2, 1}
-
-    new_pos = Bathroom.make_move(:up, pos)
-    assert new_pos == {1, 0}
-
-    new_pos = Bathroom.make_move(:down, pos)
-    assert new_pos == {1, 2}
-
-    new_pos = Bathroom.make_move(:down, {2, 2})
-    assert new_pos == {2, 2}
+    assert Bathroom.make_move(:left, pos) == {0, 1}
+    assert Bathroom.make_move(:right, pos) == {2, 1}
+    assert Bathroom.make_move(:up, pos) == {1, 0}
+    assert Bathroom.make_move(:down, pos) == {1, 2}
+    assert Bathroom.make_move(:down, {2, 2}) == {2, 2}
+    assert Bathroom.make_move(:down, {0, 1}) == {0, 2}
   end
 end
